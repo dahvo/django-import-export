@@ -59,13 +59,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install tox coverage coveralls
     - name: Run tox targets for ${{ matrix.python-version }} (sqlite)
-      run: tox run -f py$(echo ${{ matrix.python-version }} | tr -d .)
+      run: tox run -f py$(echo ${{ matrix.python-version }} | tr -d .) --parallel auto
     - name: Run tox targets for ${{ matrix.python-version }} (postgres)
-      run: tox run -f py$(echo ${{ matrix.python-version }} | tr -d .)
+      run: tox run -f py$(echo ${{ matrix.python-version }} | tr -d .) --parallel auto
       env:
         IMPORT_EXPORT_TEST_TYPE: postgres
     - name: Run tox targets for ${{ matrix.python-version }} (mysql)
-      run: tox run -f py$(echo ${{ matrix.python-version }} | tr -d .)
+      run: tox run -f py$(echo ${{ matrix.python-version }} | tr -d .) --parallel auto
       env:
         IMPORT_EXPORT_TEST_TYPE: mysql-innodb
     - name: Combine test coverage

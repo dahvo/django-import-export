@@ -19,16 +19,16 @@ docker compose -f tests/docker-compose.yml up -d
 echo "waiting for db initialization"
 sleep 45
 
-echo "running tests (sqlite)"
-tox
+echo "running tests (sqlite) in parallel"
+tox --parallel auto
 
-echo "running tests (mysql)"
+echo "running tests (mysql) in parallel"
 export IMPORT_EXPORT_TEST_TYPE=mysql-innodb
-tox
+tox --parallel auto
 
-echo "running tests (postgres)"
+echo "running tests (postgres) in parallel"
 export IMPORT_EXPORT_TEST_TYPE=postgres
-tox
+tox --parallel auto
 
 echo "removing local database instances"
 docker compose -f tests/docker-compose.yml down -v
